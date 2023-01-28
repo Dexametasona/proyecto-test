@@ -1,0 +1,17 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+form{
+    display: grid;
+    grid-template:repeat(3, min-content)/1fr 3fr ;
+    gap: 1rem;
+    font-family: 'Roboto', sans-serif;
+    .btn{
+        justify-self: center;
+        grid-column: span 2;
+    }
+}
