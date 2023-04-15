@@ -19,19 +19,19 @@ export class AnimatedFormComponent implements OnInit {
 
     setTimeout(() => {
       this.alert=false;
-    }, 2000); 
+    }, 2000);
   }
 
   animacionIn(Label:string ){
     let label=document.getElementById(Label) as HTMLLabelElement
-    label.classList.add('prueba')
+    label.classList.add('label-animation')
     label.style.opacity='80%';
   }
   animacionOut(Label:string, Input:string){
     let label=document.getElementById(Label) as HTMLLabelElement
     let input=document.getElementById(Input) as HTMLInputElement
     if(input.value=='' || input.value==null){
-      label.classList.toggle('prueba')
+      label.classList.toggle('label-animation')
       label.style.opacity='50%';
     }
   }

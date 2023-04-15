@@ -1,106 +1,104 @@
 <h1 class="mb-10 text-4xl">comunismo</h1>
 <form class="p-4 shadow-xl rounded-lg bg-slate-100" [formGroup]="form">
-  <!-- username -->
+  <!-- username------------------------------------------------------------------------------------------ -->
   <div class="relative box-input mb-6">
-    <label for="name" id="nameLabel">Nombre</label>
-    <input type="text" name="name" id="name" class="bg-gray-50 border transition duration-250 ease-in-out text-gray-900 text-lg rounded-lg focus:ring-4 focus:ring-opacity-50 focus:outline-none block w-full p-2.5 pt-5 pr-7" [ngClass]="form.get('name')?.untouched || form.get('name')?.valid? 'focus:ring-green-300 border-slate-300':'focus:ring-rose-300 border-red-300'" formControlName="name" (focus)="animacionIn('nameLabel')" (blur)="animacionOut('nameLabel','name')">
-    <!-- icons -->
+    <label for="name" id="nameLabel" class="text-slate-500"
+      >Username</label
+    >
+    <input
+      type="text"
+      name="name"
+      id="name"
+      class="bg-gray-50 border transition duration-250 ease-in-out text-gray-900 text-lg rounded-lg focus:ring-4 focus:ring-opacity-50 focus:outline-none block w-full p-2.5 pt-5 pr-7"
+      [ngClass]="
+        form.get('name')?.untouched || form.get('name')?.valid
+          ? 'focus:ring-green-300 border-slate-300'
+          : 'focus:ring-rose-300 border-red-300'
+      "
+      formControlName="name"
+      (focus)="animacionIn('nameLabel')"
+      (blur)="animacionOut('nameLabel', 'name')"
+    />
+    <!-- icons ----------------------------------------------------------------------->
     <div class="absolute top-5 right-1" *ngIf="form.get('name')?.touched">
-      <!-- check icon -->
-      <svg  xmlns="http://www.w3.org/2000/svg" *ngIf="form.get('name')?.valid" width="20" height="20" fill="#40a866" class="" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-      </svg>
-      <!-- error icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" *ngIf="form.get('name')?.invalid" width="20" height="20" fill="#991b1b" class="" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-      </svg>
-
+      <img
+        src="assets/icons-form/check-icon.svg"
+        *ngIf="form.get('name')?.valid"
+        alt="checkIcon"
+      />
+      <img
+        src="assets/icons-form/fail-icon.svg"
+        *ngIf="form.get('name')?.invalid"
+        alt="failIcon"
+      />
     </div>
-    <!-- alertas -->
-    <div class="error-alert" *ngIf="form.get('name')?.valid || form.get('name')?.touched">
-      <!-- alerta required -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('name')?.hasError('required')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
+    <!-- alertas --------------------------------------------------------------->
+    <div
+      class="error-alert"
+      *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+    >
+      <div
+        class="flex p-1 text-sm text-red-400 rounded-lg"
+        *ngIf="form.get('name')"
+      >
+        <img class="pr-3" src="assets/icons-form/info-icon.svg" alt="info-icon" />
+        <p *ngIf="form.get('name')?.hasError('required')">
           Este campo es <span class="font-bold">requerido</span>.
-        </div>
-      </div>
-      <!-- alerta minlegth -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('name')?.hasError('minlength')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
-          Mínimo <span class="font-bold">5 carácteres</span>.
-        </div>
-      </div>
-      <!-- alerta maxlength -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('name')?.hasError('maxlength')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
-          Este campo tiene máximo <span class="font-bold">30 carácteres.</span>.
-        </div>
-      </div>
-      <!-- alerta patron regex -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('name')?.hasError('pattern')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
-          Este campo es <span class="font-bold">inválido</span>.
-        </div>
+        </p>
+        <p *ngIf="form.get('name')?.hasError('minlength')">
+          Mínimo <span class="font-bold">8 carácteres</span>.
+        </p>
       </div>
     </div>
   </div>
-  <!-- contraseña -->
-  <div class="relative mb-6">
-    <label for="pass" id="passLabel" class="transition-all easy-in-out duration-500 absolute top-6 left-3 opacity-50">Contraseña</label>
-    <input type="password" name="pass" id="pass" class="bg-gray-50 border transition duration-250 ease-in-out text-gray-900 text-lg rounded-lg focus:ring-4 focus:ring-opacity-50 focus:outline-none block w-full p-2.5 pt-5 pr-7" [ngClass]="form.get('pass')?.untouched || form.get('pass')?.valid? 'focus:ring-green-300 border-slate-300':'focus:ring-rose-300 border-red-300'" formControlName="pass" (focus)="animacionIn('passLabel')" (blur)="animacionOut('passLabel','pass')">
-      <!-- icons -->
-      <div class="absolute top-5 right-1" *ngIf="form.get('pass')?.touched">
-        <!-- check icon -->
-        <svg  xmlns="http://www.w3.org/2000/svg" *ngIf="form.get('pass')?.valid" width="20" height="20" fill="#40a866" class="" viewBox="0 0 16 16">
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-        </svg>
-        <!-- error icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" *ngIf="form.get('pass')?.invalid" width="20" height="20" fill="#ef4444" class="" viewBox="0 0 16 16">
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-        </svg>
-
-      </div>
-    <!-- alertas -->
-    <div class="error-alert" *ngIf="form.get('pass')?.valid || form.get('pass')?.touched">
-      <!-- alerta required -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('pass')?.hasError('required')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
+  <!-- contraseña --------------------------------------------------------------------------------------------------->
+  <div class="relative box-input mb-6">
+    <label for="pass" id="passLabel" class="text-slate-500"
+      >Contraseña</label
+    >
+    <input
+      type="password"
+      name="pass"
+      id="pass"
+      class="bg-gray-50 border transition duration-250 ease-in-out text-gray-900 text-lg rounded-lg focus:ring-4 focus:ring-opacity-50 focus:outline-none block w-full p-2.5 pt-5 pr-7"
+      [ngClass]="
+        form.get('pass')?.untouched || form.get('pass')?.valid
+          ? 'focus:ring-green-300 border-slate-300'
+          : 'focus:ring-rose-300 border-red-300'
+      "
+      formControlName="pass"
+      (focus)="animacionIn('passLabel')"
+      (blur)="animacionOut('passLabel', 'pass')"
+    />
+    <!-- icons ------------------------------------------------------>
+    <div class="absolute top-5 right-1" *ngIf="form.get('pass')?.touched">
+      <img
+        src="assets/icons-form/check-icon.svg"
+        *ngIf="form.get('pass')?.valid"
+        alt="checkIcon"
+      />
+      <img
+        src="assets/icons-form/fail-icon.svg"
+        *ngIf="form.get('pass')?.invalid"
+        alt="failIcon"
+      />
+    </div>
+    <!-- alertas ------------------------------------------------------>
+    <div
+      class="error-alert"
+      *ngIf="form.get('pass')?.touched && form.get('pass')?.invalid"
+    >
+      <div
+        class="flex p-1 text-sm text-red-400 rounded-lg"
+        *ngIf="form.get('pass')"
+      >
+        <img class="pr-3" src="assets/icons-form/info-icon.svg" alt="info-icon" />
+        <p *ngIf="form.get('pass')?.hasError('required')">
           Este campo es <span class="font-bold">requerido</span>.
-        </div>
-      </div>
-      <!-- alerta minlegth -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('pass')?.hasError('minlength')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
-          Este campo tiene mínimo <span class="font-bold">5 carácteres.</span>.
-        </div>
-      </div>
-      <!-- alerta maxlength -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('pass')?.hasError('maxlength')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
-          Este campo tiene máximo <span class="font-bold">30 carácteres.</span>.
-        </div>
-      </div>
-      <!-- alerta patron regex -->
-      <div class="flex p-1 text-sm text-red-800 rounded-lg" role="alert" *ngIf="form.get('pass')?.hasError('pattern')">
-        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-        <span class="sr-only">Info</span>
-        <div>
-          Este campo es <span class="font-bold">inválido</span>.
-        </div>
+        </p>
+        <p *ngIf="form.get('pass')?.hasError('minlength')">
+          Mínimo <span class="font-bold">8 carácteres</span>.
+        </p>
       </div>
     </div>
   </div>
@@ -108,8 +106,7 @@
   <div class="btn"><button class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2 text-center mb-2 w-full" (click)="consolear()">Enviar</button></div>
 </form>
 <div *ngIf="alert" class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-  <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-  <span class="sr-only">Info</span>
+  <img src="assets/icons-form/info-icon.svg" class="flex-shrink-0 inline w-5 h-5 mr-3" alt="info-icon">
   <div>
     <span class="font-medium">{{mensaje}}</span>.
   </div>
