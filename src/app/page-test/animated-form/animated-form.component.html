@@ -48,6 +48,18 @@
         <p *ngIf="form.get('name')?.hasError('minlength')">
           Mínimo <span class="font-bold">8 carácteres</span>.
         </p>
+        <p *ngIf="form.get('name')?.hasError('maxlength')">
+          Máximo <span class="font-bold">10 carácteres</span>.
+        </p>
+        <p
+          *ngIf="
+            form.get('name')?.hasError('pattern') &&
+            !form.get('name')?.hasError('minlength') &&
+            !form.get('name')?.hasError('maxlength')
+          "
+        >
+          Patron<span class="font-bold">invalido</span>.
+        </p>
       </div>
     </div>
   </div>
@@ -98,6 +110,18 @@
         </p>
         <p *ngIf="form.get('pass')?.hasError('minlength')">
           Mínimo <span class="font-bold">8 carácteres</span>.
+        </p>
+        <p *ngIf="form.get('pass')?.hasError('maxlength')">
+          Máximo <span class="font-bold">10 carácteres</span>.
+        </p>
+        <p
+          *ngIf="
+            form.get('pass')?.hasError('pattern') &&
+            !form.get('pass')?.hasError('minlength') &&
+            !form.get('pass')?.hasError('maxlength')
+          "
+        >
+          Patron<span class="font-bold">invalido</span>.
         </p>
       </div>
     </div>
